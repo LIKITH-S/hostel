@@ -1,20 +1,20 @@
-# Use official Node.js runtime as base image
+# Use official Node.js runtime
 FROM node:18-alpine
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy only the backend package files first (for caching)
+# Copy only package files first for caching
 COPY backend/package*.json ./
 
-# Install backend dependencies
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the backend code
+# Copy all backend code
 COPY backend/ .
 
-# Expose the port your server uses (change if not 5000)
+# Expose the port your app listens on (should match your code)
 EXPOSE 5000
 
-# Start the backend server
+# Run the backend
 CMD ["npm", "start"]
