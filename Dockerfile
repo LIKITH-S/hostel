@@ -4,17 +4,17 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy only package files first for caching
+# Copy backend package files first (for caching)
 COPY backend/package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy all backend code
+# Copy all backend source code
 COPY backend/ .
 
-# Expose the port your app listens on (should match your code)
-EXPOSE 5000
+# Expose the port (Railway sets process.env.PORT automatically)
+EXPOSE 4000
 
-# Run the backend
-CMD ["npm", "start"]
+# Start the backend from src/server.js
+CMD ["node", "src/server.js"]
